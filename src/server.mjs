@@ -5,10 +5,22 @@ const fastify = Fastify({ logger: true })
 
 const db = initDatabase()
 
-fastify.get('/posts', async () => {
+fastify.get('/messages', async () => {
   await db.read()
 
-  return db.posts
+  const { messages } = db.data
+  console.log('returning %d messages', messages.length)
+  return messages
+})
+
+fastify.post('/messages', async (req) => {
+  const { message } = req.body
+  console.log('adding message %s', message)
+  db.data.messages.push(message)
+
+  await db.write()
+
+  return { message }
 })
 
 // Run the server!

@@ -10,8 +10,9 @@ export function initDatabase() {
   const file = join(__dirname, '..', 'db.json')
 
   // Configure lowdb to write data to JSON file
+  console.log('reading database from %s', file)
   const adapter = new JSONFile(file)
-  const defaultData = { posts: [] }
+  const defaultData = { messages: [] }
   const db = new Low(adapter, defaultData)
   return db
 }

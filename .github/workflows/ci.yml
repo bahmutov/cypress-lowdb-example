@@ -1,0 +1,13 @@
+name: ci
+on: push
+jobs:
+  tests:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v4
+      - name: Run Cypress specs 🧪
+        # https://github.com/cypress-io/github-action
+        uses: cypress-io/github-action@v5
+        with:
+          start: npm start
