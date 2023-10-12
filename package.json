@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cypress run",
     "start": "node ./src/server.mjs",
     "watch": "node --watch ./src/server.mjs"
   },
@@ -13,7 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "cypress": "^13.3.1",
-    "prettify": "^0.1.7"
+    "prettier": "^3.0.3"
   },
   "dependencies": {
     "fastify": "^4.24.0",
