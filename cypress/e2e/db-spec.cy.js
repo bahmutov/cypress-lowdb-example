@@ -6,15 +6,11 @@ describe('LowDB database', () => {
     // by calling task "clearMessages"
     // (details of the task are in the cypress.config.mjs file)
     // https://on.cypress.io/task
-    cy.task('clearMessages')
   })
 
   it('loads the initial set of messages', () => {
-    cy.request('/messages')
-      .its('body')
-      .should('be.an', 'array')
-      // confirm the list is empty
-      .and('be.empty')
+    cy.request('/messages').its('body').should('be.an', 'array')
+    // confirm the list is empty
   })
 
   it('adds a new message', () => {
@@ -25,6 +21,5 @@ describe('LowDB database', () => {
     // instead call cy.task "checkMessage" and pass the message
     // (details of the task are in the cypress.config.mjs file)
     // https://on.cypress.io/task
-    cy.task('checkMessage', message).should('be.true')
   })
 })
