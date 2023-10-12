@@ -5,6 +5,10 @@
 - Server using [Fastify](https://fastify.dev/)
 - Small local database using [LowDB](https://www.npmjs.com/package/lowdb) on top of [db.json](./db.json)
 
+🎓 Examples from my course [Cypress Plugins](https://cypress.tips/courses/cypress-plugins)
+
+- [Lesson o1: Access LowDB from Cypress tests](https://cypress.tips/courses/cypress-plugins/lessons/o1)
+
 ## Small print
 
 Author: Gleb Bahmutov &lt;gleb.bahmutov@gmail.com&gt; &copy; 2023
