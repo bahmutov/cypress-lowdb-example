@@ -1,4 +1,6 @@
-# cypress-lowdb-example
+# cypress-lowdb-example [![ci](https://github.com/bahmutov/cypress-lowdb-example/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bahmutov/cypress-lowdb-example/actions/workflows/ci.yml) ![cypress version](https://img.shields.io/badge/cypress-13.3.1-brightgreen) ![lowdb version](https://img.shields.io/badge/lowdb-6.0.1-brightgreen)
+
+> Cypress tests working with a local LowDB database
 
 - Server using [Fastify](https://fastify.dev/)
 - Small local database using [LowDB](https://www.npmjs.com/package/lowdb) on top of [db.json](./db.json)

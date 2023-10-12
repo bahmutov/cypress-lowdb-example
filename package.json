@@ -6,7 +6,8 @@
   "scripts": {
     "test": "cypress run",
     "start": "node ./src/server.mjs",
-    "watch": "node --watch ./src/server.mjs"
+    "watch": "node --watch ./src/server.mjs",
+    "badges": "npx -p dependency-version-badge update-badge cypress lowdb"
   },
   "keywords": [],
   "author": "",
