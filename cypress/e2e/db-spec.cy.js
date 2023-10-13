@@ -1,8 +1,5 @@
 /// <reference types="cypress" />
 
-// https://github.com/bahmutov/cypress-recurse
-import { recurse } from 'cypress-recurse'
-
 describe('LowDB database', () => {
   beforeEach(() => {
     cy.task('clearMessages')
@@ -16,19 +13,12 @@ describe('LowDB database', () => {
     // to be safe, let's wait 11 seconds
     // On average the delay is 5 seconds, but it could be
     // really short. So we are slowing down a lot just to be safe
-
+    // TODO: can you get rid of the hardcoded cy.wait?
+    cy.wait(11_000)
     // you would need to check the messages
     // periodically until it appears or 11 seconds pass
     // Tip: use cypress-recurse plugin or write
     // a recursive function
-    recurse(
-      () => cy.task('checkMessage', message, { log: false }),
-      Cypress._.identity,
-      {
-        log: `Found message "${message}"`,
-        timeout: 11_000,
-        delay: 100,
-      },
-    )
+    cy.task('checkMessage', message).should('be.true')
   })
 })
