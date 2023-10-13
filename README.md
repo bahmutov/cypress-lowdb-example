@@ -8,6 +8,7 @@
 🎓 Examples from my course [Cypress Plugins](https://cypress.tips/courses/cypress-plugins)
 
 - [Lesson o1: Access LowDB from Cypress tests](https://cypress.tips/courses/cypress-plugins/lessons/o1)
+- [Lesson o2: Periodically check LowDB data until the record is found](https://cypress.tips/courses/cypress-plugins/lessons/o2)
 
 ## Small print
 
