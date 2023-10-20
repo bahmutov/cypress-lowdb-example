@@ -2,6 +2,7 @@ import { defineConfig } from 'cypress'
 // import and initialize the database connection
 // similarly to how the server code does it
 import { initDatabase } from './src/database.mjs'
+import { retry } from 'cypress-recurse/src/retry.js'
 
 export default defineConfig({
   e2e: {
@@ -14,6 +15,13 @@ export default defineConfig({
       // and load any plugins that require the Node environment
       const db = initDatabase()
 
+      async function getMessages() {
+        // refresh the data and check the list
+        await db.read()
+        console.log('checking %d messages', db.data.messages.length)
+        return db.data.messages
+      }
+
       on('task', {
         async clearMessages() {
           console.log('clearMessages')
@@ -24,10 +32,19 @@ export default defineConfig({
           return null
         },
         async checkMessage(message) {
-          // refresh the data and check the list
-          await db.read()
-          console.log('checking %d messages', db.data.messages.length)
-          return db.data.messages.includes(message)
+          // use the "retry" function to call "getMessages"
+          // until the list includes the given message
+          // return a boolean result to the Cypress test
+          const found = await retry(
+            getMessages,
+            (messages) => messages.includes(message),
+            {
+              log: true,
+              limit: 11,
+              delay: 1000,
+            },
+          )
+          return found.length > 0
         },
       })
     },
