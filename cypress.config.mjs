@@ -2,6 +2,7 @@ import { defineConfig } from 'cypress'
 // import and initialize the database connection
 // similarly to how the server code does it
 import { initDatabase } from './src/database.mjs'
+// https://github.com/bahmutov/cypress-recurse
 import { retry } from 'cypress-recurse/src/retry.js'
 
 export default defineConfig({
@@ -32,19 +33,9 @@ export default defineConfig({
           return null
         },
         async checkMessage(message) {
-          // use the "retry" function to call "getMessages"
+          // TODO: use the "retry" function to call "getMessages"
           // until the list includes the given message
           // return a boolean result to the Cypress test
-          const found = await retry(
-            getMessages,
-            (messages) => messages.includes(message),
-            {
-              log: true,
-              limit: 11,
-              delay: 1000,
-            },
-          )
-          return found.length > 0
         },
       })
     },
