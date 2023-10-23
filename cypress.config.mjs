@@ -13,9 +13,8 @@ export default defineConfig({
     baseUrl: 'http://localhost:3050',
     fixturesFolder: false,
     setupNodeEvents(on, config) {
-      // register the data session plugin
+      // TODO: register the data session plugin
       // to be able to use "shareAcrossSpecs: true"
-      registerDataSession(on, config)
 
       // implement node event listeners here
       // and load any plugins that require the Node environment

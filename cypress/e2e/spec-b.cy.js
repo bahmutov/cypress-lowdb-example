@@ -9,9 +9,4 @@ it('has the message - B', () => {
   // the test message value
   // https://on.cypress.io/request
   // https://on.cypress.io/its
-  cy.get('@testMessage').then((message) => {
-    cy.request('/messages')
-      .its('body', { timeout: 0 })
-      .should('include', message)
-  })
 })

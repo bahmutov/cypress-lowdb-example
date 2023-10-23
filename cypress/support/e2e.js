@@ -11,24 +11,9 @@ beforeEach(function addMessage() {
   // has no cleared it accidentally
   // The data session should persist in the config Node process
   // to work across all specs
-  cy.dataSession({
-    name: 'testMessage',
-    setup() {
-      const k = Cypress._.random(1e4)
-      const message = `random test message ${k}`
-      cy.task('addMessage', message)
-      // we want to keep the test message itself
-      // in the data session, so cy.wrap the string
-      cy.wrap(message)
-    },
-    validate(message) {
-      cy.task('checkMessage', message).should('be.true')
-    },
-    shareAcrossSpecs: true,
-  })
-    // cy.dataSession yields the stored value
-    // can you save it in the current Cypress.env object
-    // under name "savedMessage"?
-    // https://on.cypress.io/env
-    .then((message) => Cypress.env('savedMessage', message))
+  //
+  // cy.dataSession yields the stored value
+  // can you save it in the current Cypress.env object
+  // under name "savedMessage"?
+  // https://on.cypress.io/env
 })
