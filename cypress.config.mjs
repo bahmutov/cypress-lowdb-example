@@ -4,13 +4,19 @@ import { defineConfig } from 'cypress'
 import { initDatabase } from './src/database.mjs'
 import { retry } from 'cypress-recurse/src/retry.js'
 
+// https://github.com/bahmutov/cypress-data-session
+import registerDataSession from 'cypress-data-session/src/plugin.js'
+
 export default defineConfig({
   e2e: {
     // baseUrl, etc
     baseUrl: 'http://localhost:3050',
-    supportFile: false,
     fixturesFolder: false,
     setupNodeEvents(on, config) {
+      // register the data session plugin
+      // to be able to use "shareAcrossSpecs: true"
+      registerDataSession(on, config)
+
       // implement node event listeners here
       // and load any plugins that require the Node environment
       const db = initDatabase()
@@ -23,10 +29,11 @@ export default defineConfig({
       }
 
       on('task', {
-        async clearMessages() {
-          console.log('clearMessages')
-          db.data.messages.length = 0
+        async addMessage(s) {
+          await db.read()
+          db.data.messages.push(s)
           await db.write()
+          console.log('added message "%s"', s)
           // cy.task callback must return anything
           // but undefined
           return null

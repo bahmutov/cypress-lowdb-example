@@ -15,18 +15,11 @@ fastify.get('/messages', async () => {
 
 fastify.post('/messages', async (req) => {
   const { message } = req.body
-
-  // the network call returns quickly
-  // but there is a random delay up to 10 seconds
-  // before inserting the new message
-  const delay = Math.round(Math.random() * 10_000)
-  console.log('delay %dms, then adding message "%s"', delay, message)
-  setTimeout(async () => {
-    await db.read()
-    db.data.messages.push(message)
-    await db.write()
-    console.log('wrote message to DB')
-  }, delay)
+  console.log('adding message "%s"', message)
+  await db.read()
+  db.data.messages.push(message)
+  await db.write()
+  console.log('wrote message to DB')
 
   return { message }
 })
